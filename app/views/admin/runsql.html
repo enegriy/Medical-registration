@@ -1,0 +1,21 @@
+<div class="header_text" align="center">Запрос к базе данных</div>
+		<br/>
+<%= form_tag do%>
+	<table>
+		<tr>
+			<td>
+				<%=submit_tag 'Выполнить' %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<%= text_area_tag(:sql_text, @sql_text, :size => "90x20") %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div><b>Output:</b><br/><%=@error%></div>
+			</td>
+		</tr>
+	</table>
+<% end %>

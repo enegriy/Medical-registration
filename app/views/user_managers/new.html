@@ -1,0 +1,113 @@
+
+<div class="header_text" align="center">Регистрация</div>
+
+
+<br/>
+<table style="width: 450px" >
+	<%= form_for(@user,:url=>{:action=>:create}) do |f| %>
+	<tr>
+		<td colspan="2">
+			Поля отмеченные <span class="red_text">*</span> обязательные для заполнения
+			<br/>   <br/>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<label for="user_login"><span class="red_text">*</span>Логин: </label>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<%=f.text_field :login %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<label for="user_pass"><span class="red_text">*</span>Пароль: </label>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<%=f.password_field :password %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<label for="user_pass"><span class="red_text">*</span>Введите пароль ещё раз: </label>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<%=f.password_field :password_confirmation %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<label for="user_phone"><span class="red_text">*</span>Телефон: <span class="enable_text">7(999)1234567</span></label>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+		<%=f.text_field :phone %>
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="2">
+			<label for="user_email"><span class="red_text">*</span>E-mail: <span class="enable_text">info@dom.com</span></label>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+		<%=f.text_field :email %>
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="2">
+			<label for="role"><span class="red_text">*</span><b>Кто вы:</b> <span class="enable_text">Укажите правильно вашу роль в системе!</span></label>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<%= select_tag(:role_id,options_for_select(UserManagersHelper.get_roles_by_user(session))) %>
+		</td>
+	</tr>
+	
+	<tr>
+		<td colspan="2" class="middle">
+			<% op = [" + "] %>
+			<% a = rand(10) %>
+			<% b = rand(10) %>
+			<% curr_op = op[rand(1)]%>
+			<%=hidden_field_tag(:result, eval(a.to_s+curr_op+b.to_s)) %>
+			Вычислите выражение:<b>
+			<%=a.to_s + curr_op + b.to_s + " = " %></b>
+
+			<%=text_field_tag :input_val,nil,:style=>"width: 44px; text-align:center" %>
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="2">
+			<%= check_box_tag(:license, "1", false) %><b>Я принимаю условия <span class="underline pointer" onclick="GetLicense()">"Лицензионного соглашения"</span></b>
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="2">
+			<br/>
+		</td>
+	</tr>
+
+	<tr>
+		<td width="130px">
+			<%= f.submit "Регистрация", :style=>"width:120px;" %>
+		</td>
+		
+		<td>
+			<%=link_to "Отменить", root_path%>
+		</td>
+	</tr>
+	<%end %>
+</table>

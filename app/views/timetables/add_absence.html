@@ -1,0 +1,27 @@
+<div class="header_text" align="center">Добавить дату отсутствия</div> <br/>
+
+<table style="width: 340px">
+<%=form_for(:doctor_absence, :url=>{:action=>:save_absence}) do |f|%>
+<%=f.hidden_field(:doctor_id) %>
+	<tr>
+		<td width="150px" class="middle">Дата отсутствя:</td>
+		<td>
+			<%=date_select("absence_date", "date", :start_year => Date.current.year, :use_month_numbers => true,
+				:include_blank => false,:order => [:day, :month, :year])%>
+		</td>
+	</tr>
+	<tr>
+		<td class="middle">Причина отсутствия:</td>
+		<td><%= f.select(:absence_id,options_for_select(Absence.all.map { |abs| [abs.title, abs.id] })) %></td>
+	</tr>
+	<tr>
+		<td><br/></td>
+	</tr>
+	<tr>
+		<td  colspan="2">
+			<%=f.submit "Добавить"%>  &nbsp&nbsp&nbsp
+			<%=link_to "Отменить", '/timetables' %>
+		</td>
+	</tr>
+	<%end%>
+</table>

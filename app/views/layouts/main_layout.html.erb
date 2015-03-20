@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Интернет-регистратура</title>
+  
+  <%=render 'partial/header' %>
+
+</head>
+<body>
+
+
+  <table width="100%">
+
+    <tr>
+
+      <td width="289px" height="80px" id="color_blue" >
+        <img src="/assets/header/header1.png" alt="Интернет-регистратура" border="0px">
+      </td>
+
+      <td id="color_blue">
+        <div id="right">
+          <%= render session[:user_id].blank? ? 'partial/form_login' : 'partial/text_informer' %>
+        </div>
+      </td>
+
+    </tr>
+
+  </table>
+
+
+<%=render 'partial/menu' %>
+<br/>
+
+
+<div class="container" align="center">
+
+  <%=render 'partial/message'%>
+
+  <div class="wrap">
+    <%= yield %>
+  </div>
+
+  <%=render 'partial/footer' %>
+</div>
+
+
+
+</body>
+</html>

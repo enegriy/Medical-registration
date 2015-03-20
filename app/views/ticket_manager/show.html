@@ -1,0 +1,35 @@
+<table style="border: dotted 1px; padding:10px; width:300px; text-align:center;">
+	<tr>
+		<td>
+			<span style="font-size:16px;"><%=@doctor.organization.name %></span>
+			<br/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="font-size:12px;"><%=@doctor.organization.city.region.name %></br>
+			<%=@doctor.organization.street %> <%=@doctor.organization.number %></span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<br/>
+			<span style="font-size:18px;  font-weight:bold"><%=@doctor.soname %></br>
+			<%=@doctor.name %> <%=@doctor.second_name %></span><br>
+			<span style="font-size:14px;"><%=@doctor.spec.name %></span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<br/>
+			<span style="font-size:16px;">Дата:</span> 
+			<span style="font-size:18px; font-weight:bold"><%=@ticket.visit_date.strftime("%d.%m.%Y %H:%M") %></span>
+		</td>
+	</tr>
+	<tr>
+		<td style="text-align:right">
+			<br/>
+			<span style="font-size:12px;">www.k-docto.ru </span>
+		</td>
+	</tr>
+</table>

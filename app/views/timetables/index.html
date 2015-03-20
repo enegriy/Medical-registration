@@ -1,0 +1,70 @@
+<%Time::DATE_FORMATS[:ru_datetime] = "%k:%M"%>
+
+<div class="header_text" align="center">Расписание</div> <br/>
+
+<!-- Расписание -->
+<table   id="tblSel">
+    <tr>
+        <td colspan="4" class="classical_background"><%=link_to "Добавить", :new_timetable %></td>
+    </tr>
+    <tr class="table_header">
+        <td width="120px" id="color_blue" class="padding">День недели</td>
+        <td width="120px" id="color_blue" class="padding">Время работы</td>
+        <td width="120px" id="color_blue" class="padding">Длительность приема(мин)</td>
+        <td width="120px" id="color_blue" class="padding"></td>
+    </tr>
+    <% store_day = ""%>
+    <% for timetable in @timetables %>
+    <tr>
+        <% if timetable.daytype_id == 2%>
+        <td align="center"  class="padding cell-left i">
+            <%=timetable.dayofweek.name%>
+        </td>
+        <td align="left"  class="padding cell-bottom i" colspan="2">
+            Выходной
+        </td>
+        <%else%>
+        <td  align="center"  class="padding cell-left i">
+            <%if store_day != timetable.dayofweek.name%>
+                <%=timetable.dayofweek.name; store_day = timetable.dayofweek.name %>
+            <%end%>
+        </td>
+        <td  align="left"  class="padding cell-bottom i">
+            <%=timetable.time_for.to_s(:ru_datetime)%> - <%=timetable.time_to.to_s(:ru_datetime)%>
+        </td>
+        <td class="padding cell-bottom i">
+            <%=timetable.time_of_visit %>
+        </td>
+        <% end %>
+        <td align="center"  class="padding cell-right i">
+            <%=link_to "Изменить", edit_timetable_path(timetable) %> <br/>
+            <%=link_to "Удалить", timetable_path(timetable),{:method=>:delete, :confirm =>"Вы уверены?"} %>
+        </td>
+    </tr>
+    <% end %>
+    
+</table>
+
+<br>
+
+<!-- отсутствие -->
+<table  id="tblSel">
+    <tr>
+        <td colspan="2"  class="classical_background"><%=link_to "Добавить", :add_absence_timetables %></td>
+    </tr>
+    <tr class="table_header">
+        <td width="120px" id="color_blue" class="padding">Дата</td>
+        <td width="280px" id="color_blue" class="padding">Причина отсутствия</td>
+        <td width="100px" id="color_blue" class="padding"></td>
+    </tr>
+    <% @doctor_absence.each do |doc_abs| %>
+    <tr>
+        <td align="center"  class="padding cell-left i"><%=doc_abs.absence_date.strftime("%d.%m.%Y") %></td>
+        <td align="left"  class="padding cell-bottom i"><%=doc_abs.absence.title %></td>
+        <td align="center"  class="padding cell-right i">
+        <%=link_to "Удалить", {:action=>:del_absence, :id=>doc_abs.id}, {:confirm => "Вы уверены?"} %>
+        </td>
+    </tr>
+    <% end %>
+</table>
+       

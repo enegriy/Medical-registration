@@ -1,0 +1,21 @@
+<%store_day = 700%>
+ <div class="doctor_card_text header_text">Режим работы</div>
+ <div>
+     <table>
+<%@doctor.timetables.order("dayofweek_id").each do |t|%>
+        <tr>
+            <td class="doctor_card_text">
+                <%=store_day != t.dayofweek_id ? t.dayofweek.name : ''%>
+            </td>
+            <td class="doctor_card_text">
+                <%if t.daytype_id == 2%>
+                    <span class="text1"><%="Выходной"%></span>
+                <%else%>
+                <%= " c "+t.time_for.strftime("%H:%M")+" до "+t.time_to.strftime("%H:%M")%>
+                <%end%>
+                <%store_day = t.dayofweek_id%>
+            </td>
+        </tr>
+<%end%>
+    </table>
+</div>

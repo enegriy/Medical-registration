@@ -1,0 +1,143 @@
+<div class="header_text" align="center">Редактирование профиля</div> <br/>
+<%#debug(@doctor.organization.city.region.id)%>
+<table style="width: 410px;">
+	<%=form_for(@doctor,:url=>{:action=>:save}) do |f| %>
+	<%=hidden_field_tag(:doctor_id, @doctor.id) %>
+	<tr>
+		<td colspan="2">
+			<fieldset class="fieldset round">
+				<legend>Выбрать организацию</legend>
+					<table>
+
+						<tr>
+							<td class="vert_align_middle">
+								<span class="red_text">*</span>Регион:
+							</td>
+							<td>
+								<%=select_tag(:region,options_for_select(Region.all.map { |region| [region.name, region.id] },DoctorManagerHelper.get_region(@doctor)), :prompt=>"" ,:onchange => "update_cities(this.value,null)") %>
+							</td>
+						</tr>
+
+						<tr>
+							<td class="vert_align_middle">
+								<span class="red_text">*</span>Населенный пункт:
+							</td>
+							<td>
+								<%= select_tag(:city,"", :onchange => "update_organizations(this.value,null)") %>
+							</td>
+						</tr>
+
+
+						<script type="text/javascript">
+							update_cities(document.getElementById("region").value,<%=DoctorManagerHelper.get_city(@doctor)%>)
+						</script>
+
+
+						<tr>
+							<td class="vert_align_middle">
+								<span class="red_text">*</span>Организация:
+							</td>
+							<td>
+								<%= f.select(:organization_id,"")%>
+							</td>
+						</tr>
+
+						<% if DoctorManagerHelper.get_organization(@doctor) != 0 %>
+							<script type="text/javascript">
+								update_organizations(<%=DoctorManagerHelper.get_city(@doctor)%>,<%=DoctorManagerHelper.get_organization(@doctor)%>)
+							</script>
+						<% end %>
+
+						<tr>
+							<td colspan="2" class="right_td append-1">
+								<%=link_to 'Добавить организацию', :organization_new %>
+							</td>
+						</tr>
+						
+					</table>
+			</fieldset>
+		</td>
+	</tr>
+
+
+	<tr>
+		<td width="170px" class="baseline">
+			<label for="soname"><span class="red_text">*</span>Фамилия: </label>
+		</td>
+		<td width="300px" class="baseline">
+			<%=f.text_field :soname %>
+		</td>
+	</tr>
+	<tr>
+		<td class="baseline">
+			<label for="name"><span class="red_text">*</span>Имя: </label>
+		</td>
+		<td class="baseline">
+			<%=f.text_field :name %>
+		</td>
+	</tr>
+	<tr>
+		<td class="baseline">
+			<label for="soname">Отчество: </label>
+		</td>
+		<td class="baseline">
+			<%=f.text_field :second_name %>
+		</td>
+	</tr>
+	<tr>
+		<td class="baseline">
+			<label for="date_born"><span class="red_text">*</span>Дата рождения: </label>
+		</td>
+		<td class="baseline">
+			<%= select_date @doctor.birth_date, :prefix => :birth_date,:start_year=>2020, :end_year=>1920,:use_month_numbers => true,:order => [:day, :month, :year]  %>
+		</td>
+	</tr>
+	<tr>
+		<td class="baseline">
+			<label for="spec"><span class="red_text">*</span>Специальность: </label>
+		</td>
+		<td class="baseline">
+			<%= f.select(:spec_id,options_for_select(Spec.all.map { |spec| [spec.name, spec.id] },@doctor.spec_id), :class=>"doctor_width_control") %>
+		</td>
+	</tr>
+	<tr>
+		<td class="baseline">
+			<label for="spec">Стаж: </label>
+		</td>
+		<td class="baseline">
+			<%=f.text_field :experience %>
+		</td>
+	</tr>
+	<tr>
+		<td class="baseline">
+			<label for="spec"><span class="red_text">*</span>Рабочий телефон: </label>
+		</td>
+		<td class="baseline">
+			<%=f.text_field :work_phone %>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="baseline">
+			<label for="spec">Выезд на дом: </label>
+		</td>
+		<td class="baseline">
+			<%=f.check_box :is_come_home %>
+			<br/><br/>
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="2">
+			<label for="note">Дополнительная информация: </label><br/>
+			<%= f.text_area(:note, :size => "55x4") %>
+		</td>
+	</tr>
+	<tr>
+		<td  colspan="2">
+			<%=f.submit "Сохранить" %> &nbsp&nbsp&nbsp
+			<%=link_to "Отменить", :action=>:show %>
+		</td>
+	</tr>
+	<%end %>
+</table>

@@ -1,0 +1,17 @@
+﻿<% if not @myself.nil? %>
+	<%=render :partial=>'partial/doctor', :object=>@myself, :as=>:doctor, :locals=>{:myself=>true} %>
+<% end %>
+
+
+<%if @doctors.count > 0 %>
+	<div>
+	<%for doctor in @doctors%>
+		<%=render :partial=>'partial/doctor', :object=>doctor, :as=>:doctor, :locals=>{:myself=>false} %>
+	<%end%>
+
+	</div>
+	<%= will_paginate @doctors, :page_links => true %>
+ <%else%>
+		<div class="error" align="center">Врачи не найдены! Измените условия поиска!</div>
+<%end%>
+

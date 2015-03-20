@@ -1,0 +1,54 @@
+<fieldset class="fieldset round">
+    <legend align="left">Выбрать врачей по условию</legend>
+    <div align="left">
+    <%= form_tag do%>
+        <%=hidden_field_tag(:mode,"apply")%>
+        <table>
+            <tr>
+                <td class="middle">Регион:</td>
+                <td><%= select_tag(:filter_region,options_for_select([["Все",0]]+Region.all.map { |region| [region.name, region.id] },@region),:onchange => "update_cities_filter(this.value,0)") %></td>
+            </tr>
+            
+            <tr>
+                <td class="middle">Населенный пункт:</td>
+                <td><%= select_tag(:filter_city,options_for_select([["Все",0]],@filter_city),
+                :onchange => "update_organizations_filter(this.value,0)") %></td>
+            </tr>
+
+            <% if not @region.nil? %>
+            <script type="text/javascript">
+                update_cities_filter(document.getElementById("filter_region").value,<%=MainpageHelper.nil_to_zero(@city) %>);
+            </script>
+            <% end %>
+
+            <tr>
+                <td class="middle"> Мед.организация:</td>
+                <td><%= select_tag(:org,options_for_select([["Все",0]],@org)) %></td>
+            </tr>
+
+            <% if not @city.nil? %>
+            <script type="text/javascript">
+                update_organizations_filter(<%=@city%>,<%=MainpageHelper.nil_to_zero(@org)%>)
+            </script>
+            <% end %>
+
+            <tr>
+                <td class="middle">Специальность:</td>
+                <td><%= select_tag(:spec,options_for_select([["Все",0]]+Spec.all_order_name.map { |spec| [spec.name, spec.id] },@spec)) %>
+                </td>
+            </tr>
+            <tr><td colspan="2"><br/></td></tr>
+            <tr>
+                <td>
+                    <%=submit_tag 'Применить' %>
+                </td>
+                
+                <td class="right_td">
+                    <label class="underline pointer" onclick="clear_filter()">Очистить</label>
+                </td>
+            </tr>
+        </table>
+
+    <% end %>
+    </div>
+</fieldset>

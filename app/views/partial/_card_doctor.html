@@ -1,0 +1,23 @@
+<div class="round border-1" align="center">
+
+    <table style="width: 90%; margin:0px;">
+        <tr>
+            <td width="55%">
+                <div class="doctor_card_text header_text">
+                    Врач
+                </div>
+                <div class="doctor_card_text text1">
+                      <span class="header_text"><%= DoctorManagerHelper.get_fio(@doctor)%></span>
+                </div>
+
+
+                <div class="doctor_card_text">
+                    Специальность:  <span class="header_text2"><%=@doctor.spec.name %></span>
+                </div>    
+            </td>
+            <td  valign="top">
+                <%=render 'partial/doctor_timetable'%>
+            </td>
+        </tr>
+    </table>
+</div>

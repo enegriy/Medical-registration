@@ -1,0 +1,507 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+*/
+
+body
+{
+	padding: 0px;
+	margin: 0px;
+
+	min-width: 1040px;
+}
+
+img
+{
+	padding: 0px;
+	margin: 0px;
+}
+
+td
+{
+	padding: 0px;
+}
+
+fieldset
+{
+	padding: 10px;
+	color: #205791;
+}
+
+.vert_align_middle
+{ vertical-align: middle; }
+
+td#color_blue, .color_blue
+{
+	background: #93afc9;
+	vertical-align: middle;
+}
+
+input[type=submit]
+{
+	border: 1px solid #4a759b;
+	background: #eef1f4 ;
+	color: #18446f;
+
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+
+input[type=text],input[type=password],input[type=file]
+{
+	border: 1px solid #4a759b;
+	background: #eef1f4 ;
+	color: #18446f;
+
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+
+input[type=text],input[type=password]
+{
+	padding-left: 4px;
+	padding-right: 4px; 
+}
+
+select, textarea
+{
+	border: 1px solid #4a759b;
+	background: #eef1f4 ;
+	color: #18446f;
+
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+
+div#right
+{
+	float: right;
+}
+
+tr, td
+{ vertical-align: top; }
+
+table#tblSel tr:hover
+{
+	background:#d9e1e9 ;
+}
+
+table#timetable
+{
+	width: 400px;
+}
+
+div#menu
+{
+	border-bottom: 1px solid #9a97c5;
+	padding: 0px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+}
+
+div#doctor_cart
+{
+	width:650px;
+	background: #ffffff;
+	border-bottom: 1px dotted #555555;
+}
+
+table#doctor_grid
+{
+	width: 450px;
+	padding-left: 15px;
+	height : 150px;
+}
+
+
+td#doctor_cell
+{
+	background: #ffffff;
+}
+
+td#header
+{
+	text-align: center;
+}
+
+select, select#city, select#region, select#doctor_organization_id
+{
+	border-color: #bbbbbb;
+	/*color: #205791;
+	font-weight: bold; */
+
+}
+
+select#city, select#region, select#doctor_organization_id, select#doctor_spec_id
+{
+	width: 226px;
+}
+
+select#daytype_id, select#dayofweek_id
+{
+	width: 178px;
+}
+
+select#doctor_absence_absence_id
+{
+	width: 125px;
+}
+
+
+select#filter_region, select#filter_city, select#org, select#spec
+{
+	width: 150px;
+}
+
+input#timetable_time_of_visit
+{
+	width: 174px;
+}
+
+select:focus
+{
+	border-color: #808080;
+}
+
+
+
+input#login, input#password
+{
+	width:90px;
+}
+/*------------------------------------------*/
+.block_img
+{
+	float: left;
+	width: 200px;
+}
+
+.space
+{
+	padding-right: 4px;
+	padding-left: 4px;
+}
+
+.classical_background
+{
+	background: #ffffff;
+}
+
+.container
+{
+	width: 700px;
+	background: #ffffff;
+}
+
+.wrap
+{
+	padding: 15px;
+	background: #ffffff;
+}
+
+.filter_left
+{
+	float: left;
+	width: 290px;
+}
+
+
+.round
+{
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+
+}
+
+.grayscale
+{
+	-webkit-filter: grayscale(100%);  
+}
+
+.text_bold
+{
+	font-weight: bold;
+}
+
+
+
+.header
+{
+	height: 80px;
+	border-bottom: 1px solid #000000;
+	background: #0099ff;
+}
+
+
+.notice, .error, .success
+{
+	width: 700px;
+}
+
+.span-5-w
+{
+	height: 150px;
+}
+
+.span-5-h
+{
+	width: 150px;
+}
+
+.button_login
+{
+	margin: 4px;
+}
+
+.font_header
+{
+	font-weight: normal;
+	font-size: 12px; 
+}
+
+.header_text , .header_text1
+{
+	color: #205791;
+	font-weight: bold;
+	font-size: 16px;  
+}
+.header_text1{font-weight: normal;}
+.header_text2{color: #205791;}
+
+.doctor_card_text
+{
+/*    font-size: 13px; */
+	padding-left: 7px;
+	padding-bottom: 4px;
+	padding-top: 4px;
+	padding-right: 4px;
+	font-weight: normal;
+}
+
+.width_control
+{
+	width: 100px;
+}
+
+.width_control_percent
+{
+	width: 100%;
+}
+
+.enable_text{color: #888888; font-style: italic;}
+.middle{vertical-align: middle;}
+.baseline{vertical-align: baseline;}
+
+.padding {padding: 4px;}
+.padding-1{padding-left: 1px; padding-right: 1px;}
+.padding-2{ padding: 2px;padding-right: 10px; }
+.padding-3 {padding: 15px;}
+.padding-4{padding-top: 10px;}
+
+.border-1{ border: 1px solid #205791; }
+.border-2{ border-left: 1px solid #86d6f5; border-bottom: 1px solid #86d6f5; border-right: 1px solid #86d6f5; }
+.border-3{ border: 1px dotted #000000}
+.border-4{ border-right: 1px dotted #000000; border-bottom: 1px dotted #000000; border-top: 1px dotted #000000;}
+
+input[type=submit],.width-button {width:100px}
+
+.cell-left{border-left: 1px solid #93afc9; border-bottom: 1px solid #93afc9; }
+.cell-right{border-right: 1px solid #93afc9; border-bottom: 1px solid #93afc9; }
+.cell-bottom{ border-bottom: 1px solid #93afc9; }
+
+.i{font-style: italic;}
+.center{text-align: center;}
+.justify{text-align: justify;}
+.right_td{text-align: right;}
+
+.red_text{color: #ff0000;}
+
+.text1{font-weight: bold; color: #205791; font-size: 15px;}
+.text2{font-style: italic; color: #808080;}
+.text3{color: #808080; font-size: 12px;}
+
+
+.size09{font-size: 14px;}
+.size16{font-size: 15px;}
+.size12{font-size: 1.2em;}
+
+
+
+.true_margin
+{
+	margin: 18px;
+}
+
+.timetable
+{
+	background: #bacad9;
+}
+
+.main_footer
+{
+	width: 100%;
+}
+.footer
+{
+	width: 700px;
+	background: #e8edf1;
+	padding: 7px;
+
+	color: #205791;
+}
+
+.underline
+{
+	color:#06c;text-decoration:underline;
+}
+
+.pointer
+{
+	cursor: pointer;
+}
+
+.demo_text
+{
+	color : #205791;
+	background: #FCFDFF;
+	padding: 4px;
+	width: 240px;
+	border: 2px solid #DBE8FF;
+}
+
+/*------------------------------------------*/
+
+/*---------------- LIST TICKET-------------------------*/
+.main_table
+{
+	width: 700px;
+}
+
+.half_table
+{
+	width: 350px;
+	text-align: center;
+}
+
+.data_table
+{
+	width: 250px;
+}
+
+.row_date
+{
+	color: #828282;
+	background: #EFEFEF;
+}
+
+.border_right
+{
+	border-right: 1px dotted black;
+}
+
+.padding-right1
+{
+	padding-left: 45px;
+}
+
+
+.pr_outline
+{
+	width: 100%;
+	border: 1px solid #d9d9d9;
+	background: #E5E5E5;
+	height: 30px;
+	padding-top: 8px;
+
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.pr_inline
+{
+	width: 31%;
+	height: 25px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.pr_squared
+{
+	width: 92%;
+	/*border: 1px solid #d9d9d9;*/
+	border-top: 0px;
+	padding:10px;
+}
+
+.link
+{
+	color:#06c;text-decoration:underline;
+}
+
+.dis_link
+{
+	color:#06c;
+	text-decoration:none;
+	font-weight: bold;
+}
+
+.pr_textbox
+{
+	width:165px;
+	padding-left: 5px;
+}
+
+.pr_table
+{
+	width: 310px;
+}
+
+.pr_cell
+{
+	width: 140px;
+}
+
+.footer{
+	background:white;
+	width:100px;
+	height: 16px;
+	width: 700px;
+	color:#93afc9;
+	font-size: 12px;
+}
+
+.myself
+{
+	border: 1px dotted black;
+	padding: 10px;
+}
+
+.displayBlock
+{display: inline-block;}
+
+.line-height1
+{
+	line-height: 14px;
+}
+
+.dotted_link
+{
+	color: #205791;
+	text-decoration:none;
+	font-weight:bold;
+	font-size: 13px;
+}

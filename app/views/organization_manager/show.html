@@ -1,0 +1,30 @@
+<div class="header_text" align="center">Оганизация</div> <br/>
+
+<table style="width: 400px" >
+	<tr>
+		<td style="width: 130px" class="padding">
+			<span>Наименование:</span>
+		</td>
+		<td class="padding header_text2">
+			<%=@organization.name%>
+		</td>
+	</tr>
+	<tr>
+		<td class="padding">
+			Адрес:
+		</td>
+		<td class="padding header_text2">
+			<%=@organization.city.region.name+
+			", "+@organization.city.name+
+			", "+@organization.street+
+			" "+@organization.number.to_s%>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="padding " style="text-align: left" >
+			<br/>
+			<%=button_to "Назад", :back %>
+		</td>
+	</tr>
+
+</table>

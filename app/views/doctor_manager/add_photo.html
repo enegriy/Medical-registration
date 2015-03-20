@@ -1,0 +1,26 @@
+<%#coding:utf-8%>
+
+<div class="header_text" align="center">Добавить фотографию</div> <br/>
+
+<%= form_tag({:action => :upload}, :multipart => true) do %>
+
+<table>
+    <tr>
+        <td colspan="2" align="left">Выберите изображение:</td>
+    </tr>
+    <tr>
+        <td colspan="2"><%= file_field_tag 'picture', :style=>'width:300px',:accept => 'image/jpeg' %></td>
+    </tr>
+    <tr>
+        <td colspan="2" style="font-size: 12px">Внимание!!! Фотография не должна превышать размер 500 килобайт <br>и обязательно должна иметь тип JPEG</td>
+    </tr>
+    <tr>
+        <td width="110px" colspan="2">
+            <br/>
+            <%= submit_tag "Добавить" %> &nbsp&nbsp&nbsp
+            <%=link_to "Отменить" , :action=>:show%>
+        </td>
+    </tr>
+</table>
+
+<% end %>

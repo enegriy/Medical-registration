@@ -1,0 +1,8 @@
+<div class="header_text" align="center">Восстановление пароля</div>
+<br/>
+<%= form_tag("restore_pass") do %>
+	<div>Введите адрес электронной почты:</div>
+	<div><%= text_field_tag(:email) %>
+	<%= submit_tag("Восстановить" ,:style=>"width:120px") %></div>
+
+<% end %>

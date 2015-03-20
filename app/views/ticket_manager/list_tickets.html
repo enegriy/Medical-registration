@@ -1,0 +1,108 @@
+<div class="header_text" align="center">Cписок записавшихся пациентов</div> 
+
+<br/>
+	Врач:<span class="header_text1" align="center"> <i><%= DoctorManagerHelper.get_fio(@doctor_id)%></i></span>
+<br/>
+<br/>
+
+<table class="main_table">
+
+	<tr>
+		<td class="half_table border_right">
+
+			<table>
+				<tr>
+					<td width="70px" class="middle">На дату:</td>
+					<td>
+						<%= form_tag do%>
+						<%=date_select("on_date", "date",
+							:start_year => Date.current.year, :use_month_numbers => true,
+							:include_blank => false,:order => [:day, :month, :year],
+							:default=>@date_for_control)%>
+						<%=submit_tag 'Обновить' %>
+						<% end %>
+					</td>
+				</tr>
+			</table>
+
+
+			<% if @tickets.count == 0%>
+				Нет записей на эту дату
+			<% else %>
+				<div class="padding-right1">
+
+					<table class="data_table"  id="tblSel">
+						<tr class="table_head2">
+							<td id="color_blue" class="padding" width="120px">Время</td>
+							<td id="color_blue" class="padding" width="180px">Телефон</td>
+						</tr>
+						<% @tickets.each do |t| %>
+						<tr>
+							<td align="center" class="padding cell-left i">
+								<%=t.visit_date.strftime("%H:%M")%>
+							</td>
+							<td align="center"  class="padding cell-right i">
+								<%=t.user.phone%>
+							</td>
+						</tr>
+						<% end %>
+					</table>
+
+				</div>
+			<% end %>
+
+		</td>
+
+		<td class="half_table">
+
+			Все актуальные записи:
+
+			<br/><br/><br/>
+
+			<% if @all_tickets.length > 0 %>
+				<div class="padding-right1">
+					<table class="data_table"  id="tblSel">
+						<tr>
+							<td id="color_blue" class="padding" width="120px">Время</td>
+							<td id="color_blue" class="padding" width="180px">Телефон</td>
+						</tr>
+
+						<% date = Date.current - 1 %>
+						<% @all_tickets.each do |t| %>
+
+						<% if date.strftime("%d.%m.%y") != t.visit_date.strftime("%d.%m.%y") %>
+
+							<tr>
+								<td colspan="2" align="left" class="padding cell-left cell-right i row_date">
+									<%=t.visit_date.strftime("%d.%m.%y")%>
+								</td>
+							</tr>
+
+						<% date = t.visit_date %>
+						<% end %>
+
+						<tr>
+							<td  align="center" class="padding cell-left i">
+								<%=t.visit_date.strftime("%H:%M")%>
+							</td>
+							<td  align="center"  class="padding cell-right i">
+								<%=t.user.phone%>
+							</td>
+						</tr>
+
+						<% end %>
+
+					</table>
+				</div>
+			<% else %>
+
+				Нет актуальных записей
+
+			<% end %>
+
+		</td>
+	</tr>
+
+</table>
+
+

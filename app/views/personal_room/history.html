@@ -1,0 +1,53 @@
+<div class="header_text" align="center">Личный кабинет</div>
+<br/>
+
+<div class="pr_outline">
+	<div class="pr_inline link" onclick="location='/personal_room/index'">Актуальные записи</div>
+	<div class="pr_inline dis_link">История записей</div>
+	<div class="pr_inline link" onclick="location='/personal_room/edit'">Изменить мои данные</div>
+</div>
+
+<div class="pr_squared">
+	<br/>
+	<div id="divCont">
+
+		<table  id="tblSel">
+
+			<%if @tickets_old.count > 0%>
+
+				<tr class="table_head2">
+					<td width="120px" id="color_blue" class="padding">
+						Дата приема
+					</td>
+					<td width="250px" id="color_blue" class="padding">
+						Врач
+					</td>
+					<td width="80px" id="color_blue" class="padding">
+
+					</td>
+				</tr> 
+
+				<% @tickets_old.each do |t| %>
+					<tr>
+						<td align="center"   class="padding cell-left i">
+							<%=t.visit_date.strftime("%d.%m.%Y %H:%M") %>
+						</td>
+						<td align="left"   class="padding cell-bottom i">
+							<%=DoctorManagerHelper.get_fio(Doctor.find(t.doctor_id))%>
+						</td>
+						<td class="padding cell-right i"></td>
+					</tr>
+				<% end %>
+
+			<%else%>
+				<tr>
+					<td class="header_text1 classical_background i">Нет истории записей</td>
+				</tr>
+			<%end%>
+
+
+
+		</table>
+
+	</div>
+</div>

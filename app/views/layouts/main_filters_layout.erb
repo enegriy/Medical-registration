@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Интернет-регистратура</title>
+
+	<%=render 'partial/header' %>
+
+</head>
+<body>
+
+
+<table width="100%">
+
+	<tr>
+
+		<td width="289px" height="80px" id="color_blue" >
+			<img src="/assets/header/header1.png" alt="Интернет-регистратура" border="0px">
+		</td>
+
+		<td id="color_blue">
+			<div id="right">
+				<%= render session[:user_id].blank? ? 'partial/form_login' : 'partial/text_informer' %>
+			</div>
+		</td>
+
+	</tr>
+
+</table>
+
+
+<%=render 'partial/menu' %>
+
+<br/>
+
+
+
+<div class="filter_left true_margin">
+
+	<%=render 'partial/filters'%>
+
+	<div class="justify demo_text">
+		Для ознакомления воспользуйтесь демонстрационным профилем 
+		<br/>Логин: <b>test</b>  Пароль: <b>test</b>
+	</div>
+
+</div>
+
+
+
+<div class="container" align="center" >
+
+	<%=render 'partial/message'%>
+
+	<div class="wrap">
+		<%= yield %>
+	</div>
+
+	<%=render 'partial/footer' %>
+</div>
+
+
+<script>
+
+	function SetInline()
+	{
+		$my_div = $('.filter_left, .container');
+		$class_name = "displayBlock";
+
+		if ($(this).width() < 1330)
+		{
+			if(!$my_div.hasClass($class_name))
+			{
+				$my_div.addClass($class_name);
+			}
+			//$my_div.css("display: inline-block");
+		}
+		else
+		{
+			if($my_div.hasClass($class_name))
+			{
+				$my_div.removeClass($class_name);
+			}
+		}
+	}
+	SetInline();
+
+	$(document).ready(function(){
+		$(window).resize(SetInline);
+	});
+</script>
+
+<!-- Скрипт для google analytics -->
+<script type="text/javascript">
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-36301534-1']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+
+</script>
+
+</body>
+</html>

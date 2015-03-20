@@ -1,0 +1,53 @@
+
+<div class="header_text" align="center">Записаться</div>
+<br/>
+
+<%= form_for(@ticket,:url=>{:action=>:create}) do |f| %>
+<%= f.hidden_field(:visit_date) %>
+<%= f.hidden_field(:doctor_id) %>
+<%= f.hidden_field(:user_id) %>
+
+<table>
+
+	<tr>
+		<td>
+
+			<%=render 'partial/card_doctor'%>
+
+		</td>
+	</tr>
+
+	<tr>
+		<td id="header">
+
+			<br/>
+
+			<div>
+				<span>Дата:</span>
+				<span class="header_text"><%=@ticket.visit_date.strftime("%d.%m.%Y") %></span>
+				<span>Время:</span>
+				<span class="header_text"><%=@ticket.visit_date.strftime("%H:%M") %></span>
+			</div>
+
+			<div align="center" class="padding">
+				<table style="width: 210px">
+					<tr>
+						<td>
+							<%=f.submit 'Записаться', :class=>"width-button"%>
+							
+						</td>
+						<% end %>
+						<td>
+							<%=button_to 'Отменить', timegrid_path(@ticket.doctor_id) %>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+		</td>
+	</tr>
+
+</table>
+
+
+

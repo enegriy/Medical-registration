@@ -1,0 +1,23 @@
+<h1>Все пользователи</h1>
+
+<br/>
+<%=link_to 'Добавить пользователя', :action=>:new %>
+<br/>
+
+<hr/>
+
+<%for user in @users %>
+    Логин: 
+        <span class="gold_text">
+            <%=user.login %>
+        </span>  
+    <br/>
+    Телефон:
+        <span class="gold_text">
+            <%=user.phone%>
+        </span>
+    <br/>
+    <%=link_to 'Удалить', :id=>user, :action=>:delete, :confirm =>'Вы уверены?' %>
+    <%=link_to 'Редактировать', :action=>:edit, :id=>user %>
+    <hr id="delimiter" />
+<%end %>

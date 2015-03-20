@@ -1,0 +1,33 @@
+<table border="0">
+	<%=form_tag("/user/login") do %>
+	<%= hidden_field_tag(:controller_name, controller_path) %>
+	<%= hidden_field_tag(:action_name, action_name) %>
+	<tr >
+		<td class="middle">
+			<label for="user_login" class="space header_text2">Логин:</label>
+		</td>
+		<td class="middle">
+			<%=text_field_tag :login %>
+		</td>
+		<td class="middle">
+			<label for="user_pass" class="space header_text2">Пароль: </label>
+		</td>
+		<td class="middle">
+			<%=password_field_tag :password %>
+		</td>
+		<td class="middle">
+			<%= submit_tag "Войти", :class=>"button_login"%>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="5" id="color_blue" class="right_td">
+			<span>
+				<%=link_to 'Забыли пароль?', :form_restore_user_manager%>
+			</span> 
+			<span class="space">
+				<%=link_to "Зарегистрироваться", :new_user_manager %>
+			</span>
+		</td>
+	</tr>
+	<%end %>
+</table>

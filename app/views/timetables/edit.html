@@ -1,0 +1,45 @@
+<div class="header_text" align="center">Расписание</div>
+
+<table id="timetable">
+    <%= form_for(@timetable,:url=>{:action=>:update}) do |f| %>
+    <%=hidden_field_tag(:timetable_id, @timetable.id) %>
+    <tr>
+        <td>
+            <label for="daytype">Тип дня: </label>
+        </td>
+        <td>
+            <%= select_tag(:daytype_id,options_for_select(Daytype.all.map { |daytype| [daytype.name, daytype.id] },@timetable.daytype_id)) %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="dayofweek">День недели: </label>
+        </td>
+        <td>
+            <%= select_tag(:dayofweek_id,options_for_select(Dayofweek.all.map { |dayofweek| [dayofweek.name, dayofweek.id] },@timetable.dayofweek_id)) %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="time">Часы работы с </label>
+        </td>
+        <td>
+            <%= f.time_select :time_for %> по
+            <%= f.time_select :time_to %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="visit_continue">Длительность приема:</label>
+        </td>
+        <td>
+            <%= f.text_field :time_of_visit, :class=>:num_field %>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <%= f.submit "Сохранить" %>
+        </td>
+    </tr>
+    <%end %>
+</table>

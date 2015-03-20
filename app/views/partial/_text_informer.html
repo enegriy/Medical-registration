@@ -1,0 +1,7 @@
+<div class="space header_text2">
+    Вы вошли как:
+    <span class="text_bold text_shadow">
+        <%=session[:user_name] %>
+    </span><br/>
+    <%=link_to 'Выход', :logout_user_manager %>
+</div>

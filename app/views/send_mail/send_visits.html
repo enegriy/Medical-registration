@@ -1,0 +1,23 @@
+<% if @visits.nil? %>
+<p><b>Записавшихся пациентов нет!</b></p>
+<% elsif @visits.count > 0 %>
+К вам на прием записались:<br/><br/>
+<table>
+	<tr>
+		<td width="80px">Время</td>
+		<td>Телефон</td>
+	<tr>
+	<% @visits.each do |v|%>
+	<tr>
+		<td><b><%=v.visit_date.strftime("%H:%M")%></b></td>
+		<td><%=v.user.phone%></td>
+	<tr>
+	<% end %>
+</table>
+<% end %>
+
+<br/>
+<br/>
+<br/>
+<p>______________________</p>
+<p>С Уважением сервис <br/>www.k-docto.ru</p>

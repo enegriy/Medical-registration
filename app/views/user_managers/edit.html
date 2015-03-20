@@ -1,0 +1,31 @@
+<div>Редактирование</div>
+
+<table border="0">
+    <%=form_for(@user,:url=>{:action=>:save}) do |f| %>
+    <%=hidden_field_tag(:user_id, @user.id) %>
+    <tr>
+        <td>
+            <label for="user_login">Логин: </label>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <%=f.text_field :login,:readonly=>true,:class=>'readonly_control' %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="user_phone">Телефон: </label>
+
+    <tr>
+        <td>
+            <%=f.text_field :phone %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <%= f.submit "Сохранить" %>
+        </td>
+    </tr>
+    <%end %>
+</table>

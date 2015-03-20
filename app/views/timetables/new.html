@@ -1,0 +1,48 @@
+<div class="header_text" align="center">Добавить день</div> <br/>
+
+<table id="timetable">
+	<%= form_for(@timetable,:url=>{:action=>:create}) do |f| %>
+	<tr>
+		<td width="150px" class="middle">
+			<label for="daytype">Тип дня: </label>
+		</td>
+		<td width="200px">
+			<%= select_tag(:daytype_id,options_for_select(Daytype.all.map { |daytype| [daytype.name, daytype.id] }), :class=>"width_contro") %>
+		</td>
+	</tr>
+	<tr>
+		<td class="middle">
+			<label for="dayofweek">День недели: </label>
+		</td>
+		<td>
+			<%= select_tag(:dayofweek_id,options_for_select(Dayofweek.all.map { |dayofweek| [dayofweek.name, dayofweek.id] }), :class=>"width_control") %>
+		</td>
+	</tr>
+	<tr>
+		<td class="middle">
+			<label for="time">Часы работы с </label>
+		</td>
+		<td width="250px">
+			<%= f.time_select :time_for %> по
+			<%= f.time_select :time_to %>
+		</td>
+	</tr>
+	<tr>
+		<td class="middle">
+			<label for="visit_continue">Длительность приема:</label>
+		</td>
+		<td>
+			<%= f.text_field :time_of_visit, :class=>:width_control %>
+		</td>
+	</tr>
+	<tr>
+		<td><br/></td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<%=f.submit "Добавить" %> &nbsp&nbsp&nbsp
+			<%=link_to "Отменить", '/timetables'%>
+		</td>
+	</tr>
+	<%end %>
+</table>

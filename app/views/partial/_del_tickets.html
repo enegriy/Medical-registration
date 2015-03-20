@@ -1,0 +1,38 @@
+<table border="0" align="center" cellpadding="5" cellspacing="0">
+    <tr>
+        <td colspan="2">
+            Внимание!!!
+            <br/>
+            При измеении расписания были затронуты записи, мы рекомендуем распечатать их
+            и сообщить им что вы изменили рассписание и можете их принять в другое время
+        </td>
+    </tr>
+    <%@tickets.each do |ticket|%>
+    <tr style="background: olive">
+        <td width="150" >
+            <%=ticket.visit_date.strftime("%d.%m.%Y %H:%M")%>
+        </td>
+        <td>
+            <%=ticket.user.phone%>
+        </td>
+    </tr>
+    <%end%>
+    <tr>
+        <td colspan="2">
+            Вы можете удалить эти визиты или оставить их без изменения нажав кнопку "пропустить",
+            но не забудте сообщить записавшимся о тех изменения которые вы вносите
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <%= button_to 'Удалить',
+                :controller=>:ticket_manager,
+                :action=>:delete_collections,
+                :tickets=>@tickets %>
+        </td>
+        <td>
+            <%= button_to 'Пропустить',
+                :action=>:show%>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,36 @@
+<div class="header_text" align="center">Личный кабинет</div>
+<br/>
+
+<div class="pr_outline">
+	<div class="pr_inline link" onclick="location='/personal_room/index'">Актуальные записи</div>
+	<div class="pr_inline link" onclick="location='/personal_room/history'">История записей</div>
+	<div class="pr_inline dis_link">Изменить мои данные</div>
+</div>
+
+<div class="pr_squared">
+	<br/>
+	<div id="divCont">
+		<%= form_for(@user,:url=>{:action=>:update}) do |u| %>
+			<%=hidden_field_tag(:user_id, @user.id)%>
+			<table class="pr_table">
+				<tr>
+					<td class="middle pr_cell i">Ваш логин:</td><td><%=u.text_field :login, :disabled => 'disabled', :class=>"pr_textbox"%></td>
+				</tr>
+				<tr>
+					<td class="middle i"><span class="red_text">*</span>Телефон:</td><td><%=u.text_field :phone, :class=>"pr_textbox"%></td>
+				</tr>
+				<tr>
+					<td class="middle i"><span class="red_text">*</span>E-mail:</td><td><%=u.text_field :email, :class=>"pr_textbox"%></td>
+				</tr>
+				<% if @isDoctor %>
+					<tr>
+						<td class="middle i justify size09" colspan="2"><br/><%=check_box_tag :is_send_visits,"1", @is_send_visits %> Я хочу получать на почту список записавшихся пациентов на следующий день<br/><br/></td>
+					</tr>
+				<% end %>
+				<tr>
+					<td colspan="2" class="right_td"><%=submit_tag 'Сохранить' %></td>
+				</tr>
+			</table>
+		<%end%>
+	</div>
+</div>

@@ -1,0 +1,18 @@
+<div id="menu">
+		<% if session[:user_id].nil? %>
+				<%=link_to 'Запись на прием', root_path %>&nbsp;&nbsp;&nbsp;
+		<% else %>
+				<%
+					 @user = User.find(session[:user_id])
+					 @role = @user.role
+					 @menu_collection = @role.menus
+				%>
+
+				<% for menu in @menu_collection %>
+						<%=link_to menu.title, :controller=>menu.controller,:action=>menu.action %>&nbsp;&nbsp;&nbsp;
+				<% end %>
+
+		<% end %>
+
+		<%=link_to 'Отзывы/Предложения', 'http://internet-registration.reformal.ru/'%>
+</div>

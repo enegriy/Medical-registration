@@ -1,0 +1,76 @@
+<div class="header_text" align="center">Профиль</div> <br/>
+
+<table>
+    <tr>
+        <td class="padding-3 border-3">
+            
+            <%if not @doctor.photo_path.nil? %>
+                <%= image_tag "/uploads/"+@doctor.photo_path , :class=> "span-5-h round"%>
+            <%end %> <br/>
+            <%=link_to 'Выбрать фото', '/doctor/photo' %>
+        
+        </td>
+        
+        <td class="padding-3 border-4">
+            
+            <table>
+                <tr>
+                    <td width="110px" class="padding">Фамилия:</td>
+                    <td width="350px" class="padding i text1"><%=@doctor.soname %></td>
+                </tr>
+                <tr>
+                    <td class="padding">Имя:</td>
+                    <td class="padding i text1"><%=@doctor.name %></td>
+                </tr>
+                <tr>
+                    <td class="padding">Отчество:</td>
+                    <td class="padding i text1"><%=@doctor.second_name %></td>
+                </tr>
+                <tr>
+                    <td class="padding">Дата рождения:</td>
+                    <td class="padding i text1"><%=@doctor.birth_date.strftime("%d.%m.%Y") if not @doctor.birth_date.nil? %></td>
+                </tr>
+                <tr>
+                    <td class="padding">Специальность:</td>
+                    <td class="padding i text1"><%=@doctor.spec.name if not @doctor.spec.nil? %></td>
+                </tr>
+                <tr>
+                    <td class="padding">Телефон:</td>
+                    <td class="padding i text1"><%=@doctor.work_phone %></td>
+                </tr>
+                <tr>
+                    <td class="padding">Организация:</td>
+                    <td class="padding i">
+                        <%if not @doctor.organization.nil?%>
+                            <%=link_to @doctor.organization.name, organization_url(@doctor.organization) %>
+                        <%end%>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="padding">Стаж:</td>
+                    <td class="padding i text1"><%=@doctor.experience %></td>
+                </tr>
+                <%if @doctor.is_come_home%>
+                <tr>
+                    <td class="padding i text1" colspan="2">Возможен выезд на дом</td>
+                </tr>
+                <%end%>
+                <tr>
+                    <td class="padding">Доп информация:</td>
+                    <td class="padding justify i text1"><%=@doctor.note %></td>
+                </tr>
+                <tr>
+                    <td class="padding timetable">Расписание:</td>
+                    <td class="padding timetable"><%=link_to 'Изменить', '/timetables' %></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><br/><%=link_to 'Редактировать профиль', '/doctor/edit' %></td>
+                </tr>
+            </table>
+            
+        </td>
+    </tr>
+</table>
+
+
+

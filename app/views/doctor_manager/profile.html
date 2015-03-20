@@ -1,0 +1,73 @@
+<div class="header_text" align="center">Анкета врача</div> <br/>
+
+<table>
+	<tr>
+		<td class="padding-3 border-3">
+
+			
+			<%= image_tag DoctorManagerHelper.get_photo_path(@doctor) , :class=> "span-5-h round"%>
+			
+
+		</td>
+
+		<td class="padding-3 border-4">
+
+			<table>
+				<tr>
+					<td width="110px" class="padding">Фамилия:</td>
+					<td width="350px" class="padding i header_text2"><%=@doctor.soname %></td>
+				</tr>
+				<tr>
+					<td class="padding">Имя:</td>
+					<td class="padding i header_text2"><%=@doctor.name %></td>
+				</tr>
+				<tr>
+					<td class="padding">Отчество:</td>
+					<td class="padding i header_text2"><%=@doctor.second_name %></td>
+				</tr>
+				<tr>
+					<td class="padding">Дата рождения:</td>
+					<td class="padding i header_text2"><%=@doctor.birth_date.strftime("%d.%m.%Y") if not @doctor.birth_date.nil? %></td>
+				</tr>
+				<tr>
+					<td class="padding">Специальность:</td>
+					<td class="padding i header_text2"><%=@doctor.spec.name %></td>
+				</tr>
+				<tr>
+					<td class="padding">Телефон:</td>
+					<td class="padding i header_text2"><%=@doctor.work_phone %></td>
+				</tr>
+				<tr>
+					<td class="padding">Организация:</td>
+					<td class="padding i header_text2"><%=@doctor.organization.city.region.name+", "+@doctor.organization.city.name+", "+@doctor.organization.name if not @doctor.organization.nil? %></td>
+				</tr>
+				<tr>
+					<td class="padding">Стаж:</td>
+					<td class="padding i header_text2"><%=@doctor.experience %></td>
+				</tr>
+				<%if @doctor.is_come_home%>
+				<tr>
+					<td class="padding i header_text2" colspan="2">Возможен выезд на дом</td>
+				</tr>
+				<%end%>
+				<tr>
+					<td class="padding">Доп информация:</td>
+					<td class="padding justify i  header_text2"><%=@doctor.note %></td>
+				</tr>
+
+			</table>
+
+		</td>
+	</tr>
+	<tr>
+		<td class="center" colspan='2'> 
+			<br/>
+			<table >
+				<tr >
+					<td width='100px' style='text-align:center'><%=link_to "К поиску врачей",  :root %></td>
+					<td width='100px' style='text-align:center'><%=link_to 'Записаться на прием', timegrid_path(@doctor)%></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>

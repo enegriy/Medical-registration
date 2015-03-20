@@ -1,0 +1,93 @@
+		<% 
+			gray=""
+			if Date.current.strftime("%d.%m") == "31.10" 
+				gray = "grayscale"
+		 	end 
+		 %>
+
+		<%use_class_photo = doctor.position_photo == "h" ? "span-5-h" : "span-5-w"%>
+
+		<% my_class="" %>
+		<%if myself == true%>
+			<% my_class='class="myself"'.html_safe%>
+		<%end%>
+
+		<div id="doctor_cart" align="left" <%=my_class %> >
+			<div class="block_img">
+				<%= image_tag DoctorManagerHelper.get_photo_path(doctor), :class=> "#{use_class_photo} round #{gray}"  %>
+			</div>
+
+			<table id="doctor_grid">
+
+				<tr>
+					<td id="doctor_cell">
+						<span class="text1 size16 " id="content">
+							<%=link_to DoctorManagerHelper.get_fio(doctor), :controller=>:doctor_manager, :action=>:profile, :id => doctor.id %>
+						</span>
+					</td>
+				</tr>
+				<%if not doctor.organization_id.nil? %>
+				<tr>
+					<td>
+						<span id="content" class="header_text2"><%=doctor.organization.city.region.name %>, <%=doctor.organization.city.name %></span>
+					</td>
+				</tr>
+				<tr>
+					<td id="doctor_cell">
+						<span id="title">Мед.организация:</span> <span id="content"><%=link_to doctor.organization.name,:action=>:show,:controller=>:organization_manager,:id=>doctor.organization.id %></span>
+					</td>
+				</tr>
+				<%end%>
+				<tr>
+					<td id="doctor_cell">
+						<span id="title">Специальность:</span> <span id="content" class="header_text2 "><%=doctor.spec.name %></span>
+					</td>
+				</tr>
+				<tr>
+					<td id="doctor_cell">
+						<span id="title">Стаж:</span> <span id="content"  class="header_text2 "><%=doctor.experience %></span>
+					</td>
+				</tr>
+				<%if doctor.is_come_home%>
+				<tr>
+					<td id="doctor_cell">
+						<span id="title"  class="header_text2 ">Выезжает на дом</span>
+					</td>
+				</tr>
+				<%end%>
+				<tr>
+					<td id="doctor_cell">
+						<span id="title">Телефон:</span> <span id="content"  class="header_text2 "><%=DoctorManagerHelper.get_phone(doctor.id) %></span>
+					</td>
+				</tr>
+
+
+
+				<tr>
+					<td id="doctor_cell">
+						<br/>
+						<span class="text2 justify"><%=DoctorManagerHelper.show_note(doctor.note, doctor.id, " <a href='/#{doctor.id}' class='dotted_link'>>>Подробней</a> ").html_safe %></span>
+					</td>
+				</tr>
+
+				<% if doctor.timetables.any? %>
+				<tr>
+					<td>
+						<br/>
+						<%=link_to 'Записаться', timegrid_path(doctor.id) %>
+					</td>
+				</tr>
+				<% else %>
+				<tr>
+					<td>
+						<br/>
+						<span class="line-height1"><b>Запись недоступна! </b><br/>
+							<span class="text3"> (Нет расписания приемов) </span>
+						</span>
+					</td>
+				</tr>
+				<% end %>
+
+			</table>
+		</div>
+		<br/>

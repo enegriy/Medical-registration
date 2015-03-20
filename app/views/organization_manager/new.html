@@ -1,0 +1,71 @@
+<div class="header_text" align="center">Организация</div>
+		<br/>
+
+<table border="0" style="width: 270px;">
+	<%= form_for(@organization,:url=>{:action=>:create}) do |f| %>
+	<tr>
+		<td colspan="2">
+			<label for="Name">Название: <span class="enable_text">(например СГБ №1, ИП Петров)</span></label>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<%=f.text_field :name %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<label for="Region">Регион: </label>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<%=select_tag(:region,options_for_select(Region.all.map { |region| [region.name, region.id] }), :prompt => "", :onchange => "update_cities(this.value,null)") %>
+			<script type="text/javascript">
+				update_cities(document.getElementById("region").value,null)
+			</script>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<label for="City">Населенный пункт: </label>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<%= select_tag(:city,options_for_select(""),:prompt => "") %>
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="2">
+			<label for="street">Улица: <span class="enable_text">(например ул Садовая)</span></label>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<%=f.text_field :street %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<label for="home">Номер дома: <span class="enable_text">(например 12)</span></label>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<%=f.text_field :number %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2"><br/></td>
+	</tr>
+
+	<tr>
+		<td colspan="2">
+			<%= f.submit "Добавить" %> &nbsp&nbsp&nbsp
+			<%=link_to "Отменить", :doctor_edit%>
+		</td>
+	</tr>
+	<%end %>
+</table>

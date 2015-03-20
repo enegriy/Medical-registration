@@ -1,0 +1,112 @@
+<div class="header_text" align="center">Для записи неоходимо выбрать день и время</div>
+<br/>
+
+<div align="left">
+	<%=render 'partial/card_doctor'%>
+</div>
+
+<br/>
+
+
+<table >
+
+	<tr>
+		<td colspan="3" >
+			<%if @week == 1%>
+			<span class="enable_text"> << предыдущая неделя </span>
+			<%else%>
+				<%=link_to " << предыдущая неделя", :action=>:index, :id=>@id, :week=>1 %>
+			<%end%>
+		</td>
+		<td colspan="4" class="right_td">
+			<%if @week == 2%>
+			 <span class="enable_text"> следующая неделя >> </span>
+			<%else%>
+			<%=link_to "следующая неделя >>", :action=>:index, :id=>@id, :week=>2 %>
+			<%end%>
+		</td>
+	</tr>
+
+	<tr>
+	<!-- Шапка -->
+<%for i in 0..6%>
+		<td  width="100px" id="header" class="padding-1">
+			<div class="round color_blue">
+				<%actual_date=@start_week+i %>
+				<span class="text1"><%=actual_date.strftime("%d.%m.%y") %></span> <br/>
+				<span><%=TimegridHelper.get_day_title(actual_date) %></span>
+			</div>
+		</td>
+<%end%>
+	</tr>
+	<tr>
+	<!-- Тело -->
+<%for i in 0..6%>
+		<%
+			actual_date = @start_week+i
+
+			#Ид номер дня
+			dayofweek_id = TimegridHelper.get_weekday(actual_date)
+
+			#Получить расписание
+			timetables = Timetable.where(:dayofweek_id => dayofweek_id, :doctor_id=>@doctor_id).order(:time_for)
+
+			#массив занятых примов (тикетов)
+			array_visit_date = []
+			visit_date_records = Ticket.where("doctor_id = #{@doctor_id} and visit_date >= '#{(actual_date).strftime("%Y-%m-%d")} 00:00:00' and visit_date <= '#{(actual_date).strftime("%Y-%m-%d")} 23:59:59'").select("visit_date")
+
+			for i in 0..visit_date_records.length-1 do
+				array_visit_date[i] = visit_date_records[i].visit_date
+			end
+		%>
+
+		<td id="header">
+			<!-- причины отстутсвтивия -->
+			<% @doctor_absence = DoctorAbsence.where("doctor_id=#{@doctor_id} and absence_date='#{(actual_date).strftime("%Y-%m-%d")}'") %>
+
+			<% if  @doctor_absence.count > 0 %>
+				<br/><i><%= @doctor_absence[0].absence.title %></i>
+			<% else %>
+
+				<% timetables.each do |timetable| %>
+
+				<%
+					count_visit = 0
+					#Получить колличество приемов
+					if not timetable.nil? and timetable.daytype_id != 2
+						count_visit = TimegridHelper.get_count_visit(timetable.time_for,timetable.time_to,timetable.time_of_visit)
+					end
+				%>
+
+				<table>
+				<% if not timetable.nil?; time_start = timetable.time_for end %>
+					<% for v in 1..count_visit %>
+					<tr>
+						<td id="header">
+							<%compile_date=DateTime.new(actual_date.year,actual_date.month,actual_date.day,time_start.hour,time_start.min,0)  %>
+
+							<%if TimegridHelper.array_is_content( array_visit_date, compile_date )%>
+								<label class="enable_text"><%=time_start.strftime("%H:%M")%></label>
+							<% elsif compile_date <= DateTime.current %>
+								<label class="enable_text"><%=time_start.strftime("%H:%M")%></label>
+							<% else %>
+								<%=link_to time_start.strftime("%H:%M"), new_ticket_path(@doctor_id,compile_date.to_i), :method=>:post%>
+							<%end%>
+
+							<%time_start = time_start + (timetable.time_of_visit * 60) %>
+							</a>
+						</td>
+					</tr>
+				<% end %>
+				</table>
+
+				<% end %>
+			<% end %>
+		</td>
+
+
+
+<%end%>        
+	</tr>
+</table>
+
